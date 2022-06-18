@@ -12,3 +12,4 @@ def tratadados(dfname):
 
     df_dados.to_csv("dados_tratados.csv")
 
+tratadados()
