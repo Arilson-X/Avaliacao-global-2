@@ -57,8 +57,6 @@ print(f'Score: {score}')
 y_score = classif.predict(x_test)
 accuracy = accuracy_score(y_test, y_score, normalize=False)
 print(f'Accuracy: {accuracy} de {len(y_test)}')
-recall_score = recall_score(y_test, y_score)
-print(f'Recall Score: {recall_score}')
 
 entrada = []
 for i in range(0, 9):
