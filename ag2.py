@@ -3,7 +3,19 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Perceptron
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import recall_score
+
+
+def tratadados(dfname):
+    df_dados = pd.read_csv(dfname, sep=',')
+    df_dados = df_dados.replace('o', -1)
+    df_dados = df_dados.replace('b', 0)
+    df_dados = df_dados.replace('x', +1)
+    df_dados = df_dados.replace('negativo', -1)
+    df_dados = df_dados.replace('positivo', +1)
+    df_dados = df_dados.sort_index(ascending=False)
+
+    df_dados.to_csv("dados_tratados.csv", index=False)
+    print(df_dados)
 
 
 def verificaresultado(resultado):
@@ -27,26 +39,11 @@ def mostravelha(entrada):
           f'|{velha[6]}|{velha[7]}|{velha[8]}|')
 
 
-def tratadados(dfname):
-    df_dados = pd.read_csv(dfname, sep=',')
-    df_dados = df_dados.replace('o', -1)
-    df_dados = df_dados.replace('b', 0)
-    df_dados = df_dados.replace('x', +1)
-    df_dados = df_dados.replace('negativo', -1)
-    df_dados = df_dados.replace('positivo', +1)
-    df_dados = df_dados.sort_index(ascending=False)
-
-    df_dados.to_csv("dados_tratados.csv", index=False)
-    print(df_dados)
-
-
 tratadados('dados.csv')
 df = pd.read_csv("dados_tratados.csv")
 X = df.iloc[:, :9]
-
-print(X)
 Y = df.iloc[:, 9]
-print(type(Y))
+print(X)
 print(Y)
 
 x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size=0.8)
@@ -62,10 +59,9 @@ entrada = []
 for i in range(0, 9):
     entrada.append(int(input(f"Entre com o valor para a {i+1}ª posição: \n")))
 
+
 mostravelha(entrada)
-
 resultado = classif.predict([entrada])
-
 print(verificaresultado(resultado[0]))
 
 
