@@ -47,7 +47,7 @@ print(X)
 print(Y)
 
 x_train, x_test, y_train, y_test = train_test_split(X, Y, train_size=0.8)
-classif = Perceptron(tol=1e-3, random_state=0).fit(x_train, y_train)
+classif = Perceptron(random_state=0).fit(x_train, y_train)
 
 score = classif.score(x_test, y_test)
 print(f'Score: {score}')
